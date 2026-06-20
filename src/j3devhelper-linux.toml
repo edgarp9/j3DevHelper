@@ -1,0 +1,112 @@
+languages = [
+    "Rust",
+    "TypeScript",
+    "JavaScript",
+    "Python",
+    "Go",
+    "Java",
+    "C#",
+    "C",
+    "C++",
+    "Other",
+]
+categories = []
+
+[view]
+font_family = "Segoe UI"
+font_size = 12
+theme = "graphite"
+ui_language = "ko"
+window_width = 484
+window_height = 613
+tree_panel_width = 160
+
+[[command_tabs]]
+name = "base"
+
+[[command_tabs.buttons]]
+button_name = "Open VS Code"
+executable_path = "code"
+arguments = "{path}"
+execution_type = "shell_api"
+
+[[command_tabs.buttons]]
+button_name = "Open File Manager"
+executable_path = "xdg-open"
+arguments = "{path}"
+execution_type = "shell_api"
+
+[[command_tabs.buttons]]
+button_name = "Open Android Studio"
+executable_path = "sh"
+arguments = '''-lc 'if command -v studio >/dev/null 2>&1; then exec studio "$1"; fi; if command -v android-studio >/dev/null 2>&1; then exec android-studio "$1"; fi; if [ -x /opt/android-studio/bin/studio.sh ]; then exec /opt/android-studio/bin/studio.sh "$1"; fi; if [ -x "$HOME/android-studio/bin/studio.sh" ]; then exec "$HOME/android-studio/bin/studio.sh" "$1"; fi; printf "%s\n" "Android Studio launcher not found" >&2; exit 127' android-studio {path}'''
+execution_type = "shell_api"
+
+[[command_tabs.buttons]]
+button_name = "Open Terminal"
+executable_path = "sh"
+arguments = ""
+execution_type = "external_terminal"
+
+[[command_tabs]]
+name = "rust"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Check"
+executable_path = "cargo"
+arguments = "check"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Build"
+executable_path = "cargo"
+arguments = "build"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Build Release"
+executable_path = "cargo"
+arguments = "build --release"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Run"
+executable_path = "cargo"
+arguments = "run"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Test"
+executable_path = "cargo"
+arguments = "test"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Fmt"
+executable_path = "cargo"
+arguments = "fmt"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Fmt Check"
+executable_path = "cargo"
+arguments = "fmt --check"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Clippy All"
+executable_path = "cargo"
+arguments = "clippy --all-targets --all-features -- -D warnings"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Doc"
+executable_path = "cargo"
+arguments = "doc --no-deps"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Clean"
+executable_path = "cargo"
+arguments = "clean"
+execution_type = "external_terminal"

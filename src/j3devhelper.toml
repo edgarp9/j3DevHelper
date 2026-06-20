@@ -1,0 +1,268 @@
+languages = [
+    "Rust",
+    "TypeScript",
+    "JavaScript",
+    "Python",
+    "Go",
+    "Java",
+    "C#",
+    "C",
+    "C++",
+    "Other",
+]
+categories = []
+
+[view]
+font_family = "Segoe UI"
+font_size = 12
+theme = "graphite"
+ui_language = "en"
+window_width = 352
+window_height = 519
+tree_panel_width = 160
+
+[[tree_order]]
+type = "workspace"
+path = 'c:\'
+
+[[workspaces]]
+path = 'c:\'
+name = 'c:\'
+Language = "Other"
+
+[[command_tabs]]
+name = "base"
+
+[[command_tabs.buttons]]
+button_name = "Open VS Code"
+executable_path = "code"
+arguments = "{path}"
+execution_type = "shell_api"
+
+[[command_tabs.buttons]]
+button_name = "Open Explorer"
+executable_path = 'C:\Windows\explorer.exe'
+arguments = "{path}"
+execution_type = "shell_api"
+
+[[command_tabs.buttons]]
+button_name = "Open Android Studio"
+executable_path = 'C:\Program Files\Android\Android Studio\bin\studio64.exe'
+arguments = "{path}"
+execution_type = "shell_api"
+
+[[command_tabs.buttons]]
+button_name = "Open Terminal"
+executable_path = "cmd.exe"
+arguments = "/K cd /D {path}"
+execution_type = "shell_api"
+
+[[command_tabs]]
+name = "git"
+
+[[command_tabs.buttons]]
+button_name = "Status"
+executable_path = "git"
+arguments = "status --short --branch"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Diff"
+executable_path = "git"
+arguments = "diff"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Diff Staged"
+executable_path = "git"
+arguments = "diff --staged"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Log Graph"
+executable_path = "git"
+arguments = "log --oneline --graph --decorate --all -n 30"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Fetch Prune"
+executable_path = "git"
+arguments = "fetch --all --prune"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Pull FF Only"
+executable_path = "git"
+arguments = "pull --ff-only"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Add Patch"
+executable_path = "git"
+arguments = "add -p"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Commit"
+executable_path = "git"
+arguments = "commit"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Push"
+executable_path = "git"
+arguments = "push"
+execution_type = "external_terminal"
+
+[[command_tabs]]
+name = "rust"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Check"
+executable_path = "cargo"
+arguments = "check"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Test"
+executable_path = "cargo"
+arguments = "test"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Build"
+executable_path = "cargo"
+arguments = "build"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Run"
+executable_path = "cargo"
+arguments = "run"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Fmt Check"
+executable_path = "cargo"
+arguments = "fmt --check"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Clippy All"
+executable_path = "cargo"
+arguments = "clippy --all-targets --all-features -- -D warnings"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Cargo Doc"
+executable_path = "cargo"
+arguments = "doc --no-deps"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "clean"
+executable_path = "cargo"
+arguments = "clean"
+execution_type = "external_terminal"
+
+[[command_tabs]]
+name = "tauri"
+
+[[command_tabs.buttons]]
+button_name = "Tauri Dev"
+executable_path = "cargo"
+arguments = "tauri dev"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Tauri Build"
+executable_path = "cargo"
+arguments = "tauri build"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Tauri Info"
+executable_path = "cargo"
+arguments = "tauri info"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "NPM Tauri Dev"
+executable_path = "npm"
+arguments = "run tauri dev"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "NPM Tauri Build"
+executable_path = "npm"
+arguments = "run tauri build"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Tauri Android Dev"
+executable_path = "cargo"
+arguments = "tauri android dev"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Tauri Android Build"
+executable_path = "cargo"
+arguments = "tauri android build"
+execution_type = "external_terminal"
+
+[[command_tabs]]
+name = "kotlin"
+
+[[command_tabs.buttons]]
+button_name = "Gradle Tasks"
+executable_path = '.\gradlew.bat'
+arguments = "tasks"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Assemble Debug"
+executable_path = '.\gradlew.bat'
+arguments = "assembleDebug"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Install Debug"
+executable_path = '.\gradlew.bat'
+arguments = "installDebug"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Unit Test Debug"
+executable_path = '.\gradlew.bat'
+arguments = "testDebugUnitTest"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Connected Android Test"
+executable_path = '.\gradlew.bat'
+arguments = "connectedDebugAndroidTest"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Lint Debug"
+executable_path = '.\gradlew.bat'
+arguments = "lintDebug"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "Clean"
+executable_path = '.\gradlew.bat'
+arguments = "clean"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "ADB Devices"
+executable_path = "adb"
+arguments = "devices"
+execution_type = "external_terminal"
+
+[[command_tabs.buttons]]
+button_name = "ADB Logcat"
+executable_path = "adb"
+arguments = "logcat"
+execution_type = "external_terminal"
