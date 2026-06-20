@@ -4,6 +4,8 @@ Workspace-oriented command helper for desktop development.
 
 j3DevHelper is a small in-house desktop tool for managing folder-based workspaces and running reusable command buttons against the selected workspace. It is designed for developers who frequently switch between projects and want a simple native UI for opening tools, running Git commands, launching build commands, and organizing project-specific workflows.
 
+<img width="225" height="256" alt="j3devhelper" src="https://github.com/user-attachments/assets/84b263f0-a9ff-41be-9f68-f06405844a85" />
+
 ## GitHub Description
 
 In-house, AI-assisted desktop command helper for managing workspace-specific command groups on Windows and Linux.
