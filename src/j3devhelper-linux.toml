@@ -21,6 +21,15 @@ window_width = 484
 window_height = 613
 tree_panel_width = 160
 
+[[tree_order]]
+type = "workspace"
+path = "/home/edgar/work2/j3DevHelper"
+
+[[workspaces]]
+path = "/home/edgar/work2/j3DevHelper"
+name = "j3DevHelper"
+Language = "Rust"
+
 [[command_tabs]]
 name = "base"
 

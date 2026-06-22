@@ -39,10 +39,14 @@ pub use self::state::{
     TreeRootMutationError, WorkspaceMutationError,
 };
 pub use self::ui::{
-    APP_ICON_PNG_FILE_NAME, APP_ICON_SVG_FILE_NAME, APP_LINUX_APPLICATION_ID,
-    APP_LINUX_DESKTOP_ENTRY_NAME, APP_REPOSITORY_URL, APP_TITLE, APP_VERSION, ClientSize,
-    DEFAULT_DPI, LayoutSpec, MainContentLayout, MainWindowSpec, MenuDefinition, MenuItemDefinition,
-    RectSpec, WindowSize, main_menu_for_language, scale_dimension_for_dpi,
+    ABOUT_FILE_NAME, APP_COPYRIGHT_NOTICE, APP_ICON_PNG_FILE_NAME, APP_ICON_SVG_FILE_NAME,
+    APP_LICENSE_NOTICE, APP_LINUX_APPLICATION_ID, APP_LINUX_DESKTOP_ENTRY_NAME, APP_REPOSITORY_URL,
+    APP_TITLE, APP_VERSION, ClientSize, DEFAULT_DPI, LayoutSpec, MainContentLayout, MainWindowSpec,
+    MenuDefinition, MenuItemDefinition, PROJECT_LICENSE_FILE_NAME, RectSpec,
+    THIRD_PARTY_LICENSE_NOTICE, THIRD_PARTY_LINUX_NATIVE_LICENSE_NOTICE,
+    THIRD_PARTY_NOTICE_FILE_NAME, THIRD_PARTY_RESOURCE_LICENSE_NOTICE,
+    THIRD_PARTY_RUST_LICENSE_NOTICE, WindowSize, about_license_heading, about_license_notice,
+    default_about_text, main_menu_for_language, scale_dimension_for_dpi,
 };
 
 #[cfg(test)]

@@ -1,3 +1,4 @@
+pub mod about;
 pub mod desktop_entry;
 pub mod settings;
 

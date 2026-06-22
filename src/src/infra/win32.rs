@@ -91,12 +91,12 @@ use crate::domain::{
     CommandButtonMutationError, CommandTab, DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE,
     DomainValidationError, ExecutionType, LayoutSpec, MainContentLayout, MainWindowSpec,
     MenuDefinition, MenuItemDefinition, RectSpec, TreeRootItemRef, UI_FONT_SIZE_OPTIONS,
-    UiLanguage, ViewSettings, ViewTheme, WindowSize, Workspace, current_ui_language,
-    default_workspace_language_for_options, default_workspace_language_options,
-    default_workspace_name_for_path, infer_workspace_language_from_entry_names,
-    main_menu_for_language, normalize_ui_font_size, normalize_workspace_language,
-    normalize_workspace_language_options, scale_dimension_for_dpi, unknown_argument_tokens,
-    workspace_belongs_to_category, workspace_paths_equal,
+    UiLanguage, ViewSettings, ViewTheme, WindowSize, Workspace, about_license_heading,
+    current_ui_language, default_workspace_language_for_options,
+    default_workspace_language_options, default_workspace_name_for_path,
+    infer_workspace_language_from_entry_names, main_menu_for_language, normalize_ui_font_size,
+    normalize_workspace_language, normalize_workspace_language_options, scale_dimension_for_dpi,
+    unknown_argument_tokens, workspace_belongs_to_category, workspace_paths_equal,
 };
 use crate::error::{AppError, AppResult};
 #[cfg(test)]

@@ -16,8 +16,20 @@ const FONT_DIALOG_WIDTH: i32 = 500;
 const FONT_DIALOG_HEIGHT: i32 = 292;
 const LANGUAGE_CONFIG_DIALOG_WIDTH: i32 = 460;
 const LANGUAGE_CONFIG_DIALOG_HEIGHT: i32 = 330;
-const ABOUT_DIALOG_WIDTH: i32 = 320;
-const ABOUT_DIALOG_HEIGHT: i32 = 160;
+const ABOUT_DIALOG_WIDTH: i32 = 460;
+const ABOUT_DIALOG_HEIGHT: i32 = 300;
+const ABOUT_LICENSE_NOTICE_RECT: RectSpec = RectSpec {
+    x: 24,
+    y: 120,
+    width: 404,
+    height: 92,
+};
+const ABOUT_OK_BUTTON_RECT: RectSpec = RectSpec {
+    x: 192,
+    y: 220,
+    width: 76,
+    height: 28,
+};
 const WM_WORKSPACE_DIALOG_PATH_CHECKED: u32 = WM_APP + 1;
 const WM_WORKSPACE_DIALOG_LANGUAGE_INFERRED: u32 = WM_APP + 2;
 const CONTROL_NAME_EDIT_ID: i32 = 2001;
@@ -45,6 +57,7 @@ const CONTROL_FONT_APPLY_BUTTON_ID: i32 = 7004;
 const CONTROL_LANGUAGE_CONFIG_EDIT_ID: i32 = 8001;
 const CONTROL_LANGUAGE_CONFIG_DEFAULT_BUTTON_ID: i32 = 8002;
 const CONTROL_ABOUT_LINK_ID: i32 = 9001;
+const CONTROL_ABOUT_LICENSE_NOTICE_ID: i32 = 9002;
 static NEXT_WORKSPACE_DIALOG_REQUEST_ID: std::sync::atomic::AtomicU32 =
     std::sync::atomic::AtomicU32::new(1);
 
@@ -487,6 +500,8 @@ impl AboutDialogContext {
 struct AboutDialogControls {
     message_label: HWND,
     repository_link: HWND,
+    license_heading_label: HWND,
+    license_notice_label: HWND,
     ok_button: HWND,
 }
 
@@ -495,12 +510,20 @@ impl AboutDialogControls {
         Self {
             message_label: null_mut(),
             repository_link: null_mut(),
+            license_heading_label: null_mut(),
+            license_notice_label: null_mut(),
             ok_button: null_mut(),
         }
     }
 
-    fn handles(&self) -> [HWND; 3] {
-        [self.message_label, self.repository_link, self.ok_button]
+    fn handles(&self) -> [HWND; 5] {
+        [
+            self.message_label,
+            self.repository_link,
+            self.license_heading_label,
+            self.license_notice_label,
+            self.ok_button,
+        ]
     }
 }
 
@@ -1805,10 +1828,19 @@ fn create_about_dialog_controls(
     message: &str,
 ) -> AppResult<()> {
     let static_class = wide_null("STATIC");
+    let edit_class = wide_null("EDIT");
     let button_class = wide_null("BUTTON");
 
     let label_style = WS_CHILD | WS_VISIBLE;
     let link_style = WS_CHILD | WS_VISIBLE | WS_TABSTOP | LWS_TRANSPARENT;
+    let license_notice_style = WS_CHILD
+        | WS_VISIBLE
+        | WS_TABSTOP
+        | WS_BORDER
+        | WS_VSCROLL
+        | ES_MULTILINE as u32
+        | ES_AUTOVSCROLL as u32
+        | ES_READONLY as u32;
     let ok_button_style = WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_GROUP | BS_DEFPUSHBUTTON as u32;
     let language = context.language;
 
@@ -1843,6 +1875,31 @@ fn create_about_dialog_controls(
             },
             "CreateWindowExW about repository link",
         )?,
+        license_heading_label: create_dialog_child(
+            hwnd,
+            instance,
+            static_class.as_ptr(),
+            about_license_heading(language),
+            label_style,
+            0,
+            RectSpec {
+                x: 24,
+                y: 94,
+                width: 388,
+                height: 22,
+            },
+            "CreateWindowExW about license heading label",
+        )?,
+        license_notice_label: create_dialog_child(
+            hwnd,
+            instance,
+            edit_class.as_ptr(),
+            &crate::infra::about::load_about_text().replace('\n', "\r\n"),
+            license_notice_style,
+            CONTROL_ABOUT_LICENSE_NOTICE_ID,
+            ABOUT_LICENSE_NOTICE_RECT,
+            "CreateWindowExW about license notice label",
+        )?,
         ok_button: create_dialog_child(
             hwnd,
             instance,
@@ -1850,12 +1907,7 @@ fn create_about_dialog_controls(
             tr(language, "닫기", "Close"),
             ok_button_style,
             IDOK,
-            RectSpec {
-                x: 122,
-                y: 88,
-                width: 76,
-                height: 28,
-            },
+            ABOUT_OK_BUTTON_RECT,
             "CreateWindowExW about ok button",
         )?,
     };
@@ -3540,5 +3592,22 @@ unsafe fn text_input_dialog_context_mut(hwnd: HWND) -> Option<&'static mut TextI
     } else {
         // SAFETY: The pointer is non-owning and valid for the current message dispatch.
         unsafe { pointer.as_mut() }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn about_dialog_close_button_reserves_room_for_non_client_frame() {
+        const NON_CLIENT_HEIGHT_RESERVE: i32 = 40;
+        const MIN_BOTTOM_PADDING: i32 = 10;
+
+        let close_bottom = ABOUT_OK_BUTTON_RECT.y + ABOUT_OK_BUTTON_RECT.height;
+
+        assert!(
+            close_bottom + NON_CLIENT_HEIGHT_RESERVE + MIN_BOTTOM_PADDING <= ABOUT_DIALOG_HEIGHT
+        );
     }
 }

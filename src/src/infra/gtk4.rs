@@ -18,6 +18,8 @@ use gtk::{
 };
 use gtk::{gdk, gio, glib, pango};
 
+#[cfg(test)]
+use crate::domain::about_license_notice;
 use crate::domain::{
     APP_ICON_PNG_FILE_NAME, APP_ICON_SVG_FILE_NAME, APP_LINUX_APPLICATION_ID, APP_REPOSITORY_URL,
     APP_TITLE, APP_VERSION, ARGUMENT_TOKENS, AppSettings, AppState, ArgumentResolutionError,
@@ -25,14 +27,15 @@ use crate::domain::{
     CommandTabMoveDirection, DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE, ExecutionType, LayoutSpec,
     MainWindowSpec, TreeKeyboardMoveDirection, TreeRootItemRef, UI_FONT_SIZE_OPTIONS, UiLanguage,
     ViewSettings, ViewTheme, WindowSize, Workspace, WorkspaceTreeDropAction,
-    WorkspaceTreeDropTarget, arguments_require_workspace, command_button_drop_destination,
-    command_button_move_destination, command_tab_move_destination, current_ui_language,
-    default_workspace_language_for_options, default_workspace_language_options,
-    default_workspace_name_for_path, infer_workspace_language_from_entry_names,
-    normalize_ui_font_size, normalize_workspace_language_options, replace_argument_tokens,
-    resolve_argument_replacements, tree_root_keyboard_move_destination, unknown_argument_tokens,
-    workspace_belongs_to_category, workspace_category_index, workspace_keyboard_move_destination,
-    workspace_paths_equal, workspace_tree_drop_action,
+    WorkspaceTreeDropTarget, about_license_heading, arguments_require_workspace,
+    command_button_drop_destination, command_button_move_destination, command_tab_move_destination,
+    current_ui_language, default_workspace_language_for_options,
+    default_workspace_language_options, default_workspace_name_for_path,
+    infer_workspace_language_from_entry_names, normalize_ui_font_size,
+    normalize_workspace_language_options, replace_argument_tokens, resolve_argument_replacements,
+    tree_root_keyboard_move_destination, unknown_argument_tokens, workspace_belongs_to_category,
+    workspace_category_index, workspace_keyboard_move_destination, workspace_paths_equal,
+    workspace_tree_drop_action,
 };
 use crate::error::AppResult;
 use crate::infra::settings;
@@ -53,8 +56,8 @@ const ARGUMENT_TOKEN_BUTTON_WIDTH: i32 = 156;
 const ARGUMENT_TOKEN_BUTTON_HEIGHT: i32 = 28;
 const EXECUTABLE_FILE_PATTERNS: &[&str] = &["*.exe", "*.cmd", "*.bat", "*.ps1", "*.com"];
 const ALL_FILE_PATTERNS: &[&str] = &["*"];
-const ABOUT_DIALOG_WIDTH: i32 = 320;
-const ABOUT_DIALOG_HEIGHT: i32 = 160;
+const ABOUT_DIALOG_WIDTH: i32 = 460;
+const ABOUT_DIALOG_HEIGHT: i32 = 300;
 
 pub fn run_main_window(spec: MainWindowSpec) -> AppResult<()> {
     let app = Application::builder()
@@ -2060,6 +2063,32 @@ fn show_about_dialog(parent: &ApplicationWindow, language: UiLanguage) {
     link.set_markup(&about_link_markup(APP_REPOSITORY_URL));
     link.set_xalign(0.0);
     content.append(&link);
+
+    let separator = Separator::new(Orientation::Horizontal);
+    separator.set_margin_top(4);
+    separator.set_margin_bottom(2);
+    content.append(&separator);
+
+    let license_heading = Label::new(Some(about_license_heading(language)));
+    license_heading.set_xalign(0.0);
+    content.append(&license_heading);
+
+    let license_notice = Label::new(Some(&crate::infra::about::load_about_text()));
+    license_notice.set_xalign(0.0);
+    license_notice.set_valign(Align::Start);
+    license_notice.set_selectable(true);
+    license_notice.set_wrap(true);
+    license_notice.set_wrap_mode(pango::WrapMode::WordChar);
+
+    let license_scroll = ScrolledWindow::builder()
+        .hexpand(true)
+        .vexpand(true)
+        .hscrollbar_policy(gtk::PolicyType::Never)
+        .vscrollbar_policy(gtk::PolicyType::Automatic)
+        .min_content_height(100)
+        .build();
+    license_scroll.set_child(Some(&license_notice));
+    content.append(&license_scroll);
 
     run_dialog(&dialog);
     close_dialog_and_present_parent(&dialog);
@@ -7154,7 +7183,8 @@ mod tests {
         );
         assert_eq!(about_dialog_close_label(UiLanguage::Korean), "닫기");
         assert_eq!(about_dialog_close_label(UiLanguage::English), "Close");
-        assert_eq!((ABOUT_DIALOG_WIDTH, ABOUT_DIALOG_HEIGHT), (320, 160));
+        assert_eq!((ABOUT_DIALOG_WIDTH, ABOUT_DIALOG_HEIGHT), (460, 300));
+        assert!(about_license_notice(UiLanguage::English).contains("GPL-3.0"));
     }
 
     #[test]

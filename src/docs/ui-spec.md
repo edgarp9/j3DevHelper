@@ -32,6 +32,7 @@
 - Windows에서는 `icon.ico`를 실행 파일 아이콘과 프로그램 창 아이콘에 같은 자산으로 적용한다.
 - Linux GTK4에서는 `icon.svg`를 창 아이콘으로 우선 사용하고 없으면 `icon.png`를 사용한다. `--install`은 `io.github.edgarp9.j3DevHelper` desktop entry와 hicolor 아이콘 설치 경로를 함께 맞추며, Plasma fallback용 `io.github.edgarp9.j3devhelper` alias도 설치한다.
 - Windows 작업 표시줄과 Alt+Tab 전환 화면에서도 동일한 아이콘이 표시되어야 한다.
+- `icon.svg`와 그 변환/패키징 파생물인 `icon.ico`는 Google Fonts Icons / Material Symbols `logo_dev` 기반 SIL Open Font License 1.1 (OFL-1.1) 자산으로 고지하며, SVG/ICO 파일에 대한 정확한 적용 여부는 `THIRD_PARTY_NOTICES.txt`의 확인 필요 항목에 남긴다.
 
 ## 4. 전체 레이아웃
 
@@ -77,7 +78,7 @@
 - 선택된 대상이 없으면 해당 대상에 의존하는 메뉴 항목은 비활성화한다.
 - 편집, 삭제, 위로/아래로처럼 기존 대상을 변경하는 항목은 현재 선택 대상이 명확할 때만 활성화한다.
 - `파일 > 종료`는 메인 창에 닫기 요청을 보내고 표준 종료 경로를 따른다.
-- `파일 > 정보`는 앱 이름과 버전을 한 줄(`j3DevHelper  v{version}`)로 표시하고, `https://github.com/edgarp9` 링크를 메인 윈도우 중앙 대화상자로 표시한다.
+- `파일 > 정보`는 앱 이름과 버전을 한 줄(`j3DevHelper  v{version}`)로 표시하고, `https://github.com/edgarp9` 링크와 `Licenses`/`라이선스` 영역에 배포 파일 `about.txt` 내용을 표시한다. `about.txt`에는 프로젝트 GPL-3.0-or-later, 보증 없음, `LICENSE`, `THIRD_PARTY_NOTICES.txt`, 대응 소스 코드 위치, 제3자 고지 요약이 포함된다. 설치된 앱에서 `about.txt`를 찾지 못하면 빌드에 포함된 기본 텍스트를 표시한다. 라이선스 영역은 긴 고지 목록을 확인할 수 있도록 세로 스크롤을 제공한다.
 
 인지 UX 기준:
 

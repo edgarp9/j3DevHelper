@@ -31,8 +31,8 @@
 | UI Language Setting | 애플리케이션 메뉴, 대화상자, 주요 상태/오류 메시지의 표시 언어 |
 | Window Layout Setting | 메인 창 크기와 좌우 `워크스페이스`/`명령 그룹` 영역 분할 폭 |
 | Settings File | 기본적으로 실행 파일과 같은 폴더에 저장되며, CLI 인자로 다른 경로를 지정할 수 있는 사용자 설정 TOML 파일 |
-| App Icon | 프로그램 창에 적용되는 아이콘 자산. Windows는 `icon.ico`, Linux GTK4는 `icon.svg`를 우선 사용하고 없으면 `icon.png`를 사용한다. |
-| 정보 창 | 애플리케이션 이름, 버전 정보, GitHub 링크를 표시하는 정보 창 |
+| App Icon | 프로그램 창에 적용되는 아이콘 자산. Windows는 `icon.ico`, Linux GTK4는 `icon.svg`를 우선 사용하고 없으면 `icon.png`를 사용한다. 현재 아이콘 자산은 Google Fonts Icons / Material Symbols `logo_dev` 기반 SIL Open Font License 1.1 (OFL-1.1) 자산으로 고지하며, SVG/ICO 파일에 대한 정확한 적용 여부는 `THIRD_PARTY_NOTICES.txt`의 확인 필요 항목에 남긴다. |
+| 정보 창 | 애플리케이션 이름, 버전 정보, GitHub 링크, 프로젝트 GPL-3.0-or-later/보증 없음/저작권 고지, 소스코드 제공 안내, `THIRD_PARTY_NOTICES.txt` 위치를 포함한 `about.txt` 내용을 표시하는 정보 창 |
 
 ## 현재 확정된 규칙
 
@@ -320,7 +320,7 @@ execution_type = "external_terminal"
 - 메뉴 바는 현재 UI 언어에 따라 `File`/`파일`, `Workspace`/`워크스페이스`, `Command Group`/`명령 그룹`, `Command`/`명령` 순서로 생성한다.
 - `File`/`파일` 메뉴는 `Font`/`글꼴`, `Theme`/`테마`, `UI Language`/`UI 언어`, `Workspace Languages`/`워크스페이스 언어`, `About`/`정보`, `Exit`/`종료` 항목을 제공한다.
 - `파일 > 종료`는 선택 시 메인 창 닫기 요청과 같은 종료 경로를 따른다.
-- `파일 > 정보`는 앱 이름과 현재 패키지 버전을 한 줄(`j3DevHelper  v{version}`)로 표시하고, `https://github.com/edgarp9` 링크를 표시하는 정보 창을 메인 윈도우 중앙에 연다.
+- `파일 > 정보`는 앱 이름과 현재 패키지 버전을 한 줄(`j3DevHelper  v{version}`)로 표시하고, `https://github.com/edgarp9` 링크와 `Licenses`/`라이선스` 영역에 배포 파일 `about.txt` 내용을 표시하는 정보 창을 메인 윈도우 중앙에 연다. `about.txt`에는 프로젝트 GPL-3.0-or-later, 보증 없음, 저작권 고지, `LICENSE`, 대응 소스 코드 위치, `THIRD_PARTY_NOTICES.txt` 안내, 제3자 고지 요약을 포함한다. 설치된 앱에서 `about.txt`를 찾지 못하면 빌드에 포함된 기본 텍스트를 표시한다. 라이선스 영역은 긴 고지 목록을 확인할 수 있도록 세로 스크롤을 제공한다.
 - `워크스페이스` 메뉴는 `추가`, `분류 추가`, `편집`, `위로`, `아래로`, `삭제` 항목을 가진다.
 - `명령 그룹` 메뉴는 `추가`, `이름 변경`, `위로`, `아래로`, `삭제` 항목을 가진다.
 - 이번 단계에서는 최상위 워크스페이스의 추가, 편집, 삭제와 1차 깊이 분류 추가, 이름 편집, 삭제를 구현한다.
@@ -341,7 +341,7 @@ execution_type = "external_terminal"
 - 메인 콘텐츠 바깥 여백은 약 8 px, 메뉴 아래 간격은 약 6 px, 좌우 패널 간격은 약 10 px로 두어 클라이언트 영역의 빈 공간을 줄인다.
 - 좌측 트리 컨트롤 폭은 약 160 px로 유지하고, 우측 명령 그룹 드롭다운과 버튼 페이지는 남은 클라이언트 폭을 채운다. `WM_SIZE` 처리에서 두 영역의 높이를 다시 계산한다.
 - `WM_GETMINMAXINFO`에서 현재 글꼴 크기와 DPI를 반영한 최소 창 크기를 지정한다. 최소 클라이언트 크기는 좌측 트리 최소 폭 72 px, 패널 간격, 우측 명령 그룹 영역 최소 폭 116 px, 메인 패널 최소 높이 160 px를 DPI 스케일한 값으로 계산한다.
-- Windows는 저장소의 `icon.ico`를 앱 아이콘 배포 자산으로 사용한다. Linux GTK4는 저장소의 `icon.svg`를 창 아이콘과 desktop entry 아이콘 배포 자산으로 우선 사용하고, 없으면 `icon.png`를 사용한다.
+- Windows는 저장소의 `icon.ico`를 앱 아이콘 배포 자산으로 사용한다. Linux GTK4는 저장소의 `icon.svg`를 창 아이콘과 desktop entry 아이콘 배포 자산으로 우선 사용하고, 없으면 `icon.png`를 사용한다. `icon.svg`와 그 변환/패키징 파생물인 `icon.ico`는 Google Fonts Icons / Material Symbols `logo_dev` 기반 SIL Open Font License 1.1 (OFL-1.1) 자산으로 고지하며, SVG/ICO 파일에 대한 정확한 적용 여부는 `THIRD_PARTY_NOTICES.txt`의 확인 필요 항목에 남긴다.
 - `build.rs`는 `winresource`를 기본 기능 없이 사용해 Windows 타깃 빌드에서 `icon.ico`를 실행 파일 리소스 ID `1`로 임베드한다.
 - `build.rs`는 실행 파일 매니페스트도 함께 임베드해 Common Controls v6와 Per-Monitor DPI Awareness V2를 선언한다.
 - Windows 실행 시 창 아이콘은 임베드된 리소스 ID `1`을 우선 로드하고, 개발 실행 fallback으로 실행 파일 폴더 또는 현재 작업 폴더의 `icon.ico`를 로드한다.
@@ -367,7 +367,7 @@ execution_type = "external_terminal"
 - 좌우 영역 조절은 현재 창에서 즉시 반영하며, 좌측 트리 최소 폭과 우측 명령 그룹 영역 최소 폭을 침범하지 않는다. 창을 최소 폭으로 줄일 때는 현재 좌측 Tree 폭도 최소 폭까지 자동으로 축소될 수 있다.
 - 마지막 정상 종료 시점의 메인 창 크기와 좌측 Tree 영역 폭은 OS가 보고한 실제 픽셀 값으로 설정 파일에 저장하며, 다음 실행 시 같은 값으로 복원한다. DPI 변경 중에는 `WM_DPICHANGED` 권장 창 위치/크기와 레이아웃 재계산을 따른다.
 - 메뉴는 UI 언어에 맞춰 `File`/`파일`, `Workspace`/`워크스페이스`, `Command Group`/`명령 그룹`, `Command`/`명령` 순서이며, `File`/`파일`에는 글꼴, 테마, UI 언어, 워크스페이스 언어, 정보, 종료 항목을 둔다.
-- `파일 > 정보`는 `Cargo.toml`의 패키지 버전에 맞춘 앱 버전을 앱 이름과 같은 줄에 두고, `https://github.com/edgarp9` 링크를 메인 윈도우 중앙 대화상자로 표시한다.
+- `파일 > 정보`는 `Cargo.toml`의 패키지 버전에 맞춘 앱 버전을 앱 이름과 같은 줄에 두고, `https://github.com/edgarp9` 링크와 `Licenses`/`라이선스` 영역에 배포 파일 `about.txt` 내용을 메인 윈도우 중앙 대화상자로 표시한다. `about.txt`에는 프로젝트 GPL-3.0-or-later, 보증 없음, 저작권 고지, `LICENSE`, 대응 소스 코드 위치, `THIRD_PARTY_NOTICES.txt` 안내, 제3자 고지 요약을 포함한다. 설치된 앱에서 `about.txt`를 찾지 못하면 빌드에 포함된 기본 텍스트를 표시한다. 라이선스 영역은 긴 고지 목록을 확인할 수 있도록 세로 스크롤을 제공한다.
 - 최상위 워크스페이스 추가, 편집, 삭제, 마우스 드래그 순서 변경, 1차 깊이 분류 추가와 이름 편집, 분류와 최상위 워크스페이스의 혼합 `tree_order`, 워크스페이스의 분류 드롭 배치, 폴더 드래그앤드롭 등록, 중복 `path` 방지, 툴팁의 `path`와 `Language` 표시는 구현되어 있다.
 - 명령 그룹 추가, 이름 변경, 위로, 아래로, 삭제와 명령 실행, 추가, 편집, 앞으로, 뒤로, 삭제, 마우스 드래그 순서 변경은 설정 파일과 연동되어 있다.
 - 버튼 편집창은 알 수 없는 `{...}` 인수 토큰을 저장 전에 거부하고, 토큰 삽입 버튼은 현재 커서 위치에 토큰을 삽입한다.

@@ -300,6 +300,38 @@ fn main_menu_omits_view_and_help_menus() {
     );
     assert_eq!(APP_VERSION, env!("CARGO_PKG_VERSION"));
     assert_eq!(APP_REPOSITORY_URL, "https://github.com/edgarp9");
+    assert_eq!(APP_LICENSE_NOTICE, "GPL-3.0-or-later");
+    assert!(APP_COPYRIGHT_NOTICE.contains("edgarp9"));
+    assert_eq!(ABOUT_FILE_NAME, "about.txt");
+    assert_eq!(PROJECT_LICENSE_FILE_NAME, "LICENSE");
+    assert_eq!(THIRD_PARTY_NOTICE_FILE_NAME, "THIRD_PARTY_NOTICES.txt");
+    assert!(THIRD_PARTY_LICENSE_NOTICE.contains("MIT"));
+    assert!(THIRD_PARTY_RUST_LICENSE_NOTICE.contains("Unicode-3.0"));
+    assert!(THIRD_PARTY_RESOURCE_LICENSE_NOTICE.contains("Material Symbols"));
+    assert!(THIRD_PARTY_RESOURCE_LICENSE_NOTICE.contains("SIL Open Font License"));
+    assert!(THIRD_PARTY_RESOURCE_LICENSE_NOTICE.contains("OFL-1.1"));
+    assert!(THIRD_PARTY_LINUX_NATIVE_LICENSE_NOTICE.contains("LGPL-2.1-or-later"));
+    assert!(THIRD_PARTY_LINUX_NATIVE_LICENSE_NOTICE.contains("Cairo: LGPL-2.1-only OR MPL-1.1"));
+    assert!(
+        about_license_notice(UiLanguage::English).contains(&format!("j3DevHelper  v{APP_VERSION}"))
+    );
+    assert!(
+        about_license_notice(UiLanguage::English)
+            .contains("j3DevHelper is distributed under GPL-3.0-or-later.")
+    );
+    assert!(about_license_notice(UiLanguage::English).contains("No warranty"));
+    assert!(about_license_notice(UiLanguage::English).contains("LICENSE"));
+    assert!(about_license_notice(UiLanguage::English).contains(APP_COPYRIGHT_NOTICE));
+    assert!(about_license_notice(UiLanguage::English).contains("Corresponding Source"));
+    assert!(about_license_notice(UiLanguage::English).contains("j3devhelper-v0.2.0-source.zip"));
+    assert!(about_license_notice(UiLanguage::English).contains("THIRD_PARTY_NOTICES.txt"));
+    assert!(about_license_notice(UiLanguage::English).contains("Material Symbols"));
+    assert!(about_license_notice(UiLanguage::English).contains("LGPL-2.1-only OR MPL-1.1"));
+    assert_eq!(
+        about_license_notice(UiLanguage::Korean),
+        about_license_notice(UiLanguage::English)
+    );
+    assert_eq!(about_license_heading(UiLanguage::English), "Licenses");
 }
 
 #[test]

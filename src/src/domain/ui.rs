@@ -6,6 +6,23 @@ use super::state::AppState;
 pub const APP_TITLE: &str = "j3DevHelper";
 pub const APP_VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const APP_REPOSITORY_URL: &str = "https://github.com/edgarp9";
+pub const APP_LICENSE_NOTICE: &str = "GPL-3.0-or-later";
+pub const APP_COPYRIGHT_NOTICE: &str = "Copyright (C) edgarp9 and contributors";
+pub const ABOUT_FILE_NAME: &str = "about.txt";
+pub const PROJECT_LICENSE_FILE_NAME: &str = "LICENSE";
+pub const THIRD_PARTY_RUST_LICENSE_NOTICE: &str =
+    "MIT, Apache-2.0, Unlicense, Unicode-3.0, Apache-2.0 WITH LLVM-exception";
+pub const THIRD_PARTY_LINUX_NATIVE_LICENSE_NOTICE: &str =
+    "LGPL-2.1-or-later; Cairo: LGPL-2.1-only OR MPL-1.1";
+pub const THIRD_PARTY_RESOURCE_LICENSE_NOTICE: &str =
+    "Material Symbols app icon assets: SIL Open Font License 1.1 (OFL-1.1)";
+pub const THIRD_PARTY_LICENSE_NOTICE: &str = concat!(
+    "MIT, Apache-2.0, Unlicense, Unicode-3.0, Apache-2.0 WITH LLVM-exception, ",
+    "Material Symbols app icon assets: SIL Open Font License 1.1 (OFL-1.1), ",
+    "LGPL-2.1-or-later; Cairo: LGPL-2.1-only OR MPL-1.1"
+);
+pub const THIRD_PARTY_NOTICE_FILE_NAME: &str = "THIRD_PARTY_NOTICES.txt";
+const ABOUT_TEXT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/about.txt"));
 pub const APP_LINUX_APPLICATION_ID: &str = "io.github.edgarp9.j3DevHelper";
 pub const APP_LINUX_DESKTOP_ENTRY_NAME: &str = "io.github.edgarp9.j3DevHelper";
 pub const APP_ICON_SVG_FILE_NAME: &str = "icon.svg";
@@ -154,6 +171,19 @@ pub fn main_menu_for_language(language: UiLanguage) -> &'static [MenuDefinition]
         UiLanguage::Korean => &MAIN_MENU_KO,
         UiLanguage::English => &MAIN_MENU_EN,
     }
+}
+
+pub fn about_license_heading(language: UiLanguage) -> &'static str {
+    language.text("라이선스", "Licenses")
+}
+
+pub fn about_license_notice(language: UiLanguage) -> String {
+    let _ = language;
+    default_about_text().to_owned()
+}
+
+pub fn default_about_text() -> &'static str {
+    ABOUT_TEXT
 }
 
 const FILE_MENU_ITEMS_KO: [MenuItemDefinition; 6] = [

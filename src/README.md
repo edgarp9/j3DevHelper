@@ -9,6 +9,14 @@ Bundle these files together for Linux desktop use:
 - `j3devhelper` executable
 - `icon.svg`
 - `icon.png` fallback, recommended for environments that cannot load the SVG
+- `LICENSE` project license file
+- `THIRD_PARTY_NOTICES.txt` license notice file
+- `about.txt` About dialog text file
+- third-party license texts and copyright notices listed in `THIRD_PARTY_NOTICES.txt`
+
+When distributing object code, provide the GPL-3.0-or-later corresponding source
+or a valid source offer together with the release. `build_release.py` creates the
+matching source archive next to binary packages.
 
 Desktop integration is explicit and user-scoped:
 

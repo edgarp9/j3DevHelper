@@ -5,7 +5,7 @@ use std::path::Path;
 const APP_ICON_PATH: &str = "icon.ico";
 const APP_MANIFEST: &str = r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-  <assemblyIdentity version="0.1.0.0" processorArchitecture="*" name="j3DevHelper.app" type="win32" />
+  <assemblyIdentity version="0.2.0.0" processorArchitecture="*" name="j3DevHelper.app" type="win32" />
   <description>j3DevHelper</description>
   <dependency>
     <dependentAssembly>
